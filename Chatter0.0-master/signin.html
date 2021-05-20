@@ -1,0 +1,59 @@
+<!DOCTYPE html><html>
+    <html>
+        <head>
+            
+<!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-database.js"></script>
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+
+<script>
+  // Your web app's Firebase configuration
+  var firebaseConfig = {
+    apiKey: "AIzaSyCf7DrCaU5tkwqsKRfu7rNC-6dzt1q4Od8",
+    authDomain: "myscribe-data.firebaseapp.com",
+    databaseURL: "https://myscribe-data-default-rtdb.firebaseio.com",
+    projectId: "myscribe-data",
+    storageBucket: "myscribe-data.appspot.com",
+    messagingSenderId: "56781502554",
+    appId: "1:56781502554:web:842949eb24ee0d8be84063"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+</script>
+            </head><style>
+                body{
+                    background-color: black;
+                }
+            </style>
+            <body>
+                <style>
+                    div{
+                        background-color:grey;
+                    }
+                    button{
+                        background-color: rgb(0, 0, 0);
+                        color:rgb(245, 1, 1);
+                        padding: 15px 20px;
+                        border: none;
+                    }
+                    </style>
+                    <script>
+                        function signIn(){
+                        let database = firebase.database()
+                        var signin=document.getElementById('signin').value
+                        database.ref('Users/'+signin).set({
+                            message:'',
+                            name:signin
+                        })}
+                        </script>
+                    <div align='center'>
+                        <h1>Welcome to the sign in page</h1>
+                        <input type='text' id='signin' placeholder="Enter your name"><br><br>
+                        <button onclick='signIn()'>Sign in</button>
+                        </div>
+                </body>
+        </html>
+    </html>

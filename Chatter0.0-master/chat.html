@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/8.5.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.5.0/firebase-database.js"></script>
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+
+<script>
+  // Your web app's Firebase configuration
+  var firebaseConfig = {
+    apiKey: "AIzaSyDKHCEKc-kx08BtpmnaBLC-_EqTzis_yh8",
+    authDomain: "chatt-3a03f.firebaseapp.com",
+    projectId: "chatt-3a03f",
+    storageBucket: "chatt-3a03f.appspot.com",
+    messagingSenderId: "347023039448",
+    appId: "1:347023039448:web:a732a4d76085b7452bf0ad"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+</script>
+<style>
+        button{
+            padding: 20px 17px;
+            border: none;
+            background-color: aliceblue;
+        }
+        div{
+            color: rgb(24, 72, 114);
+        }
+        input{
+            color:black;
+            padding: 15px 30px;
+        }
+        #chattingpage{
+            background-color:rgb(148, 0, 0);
+            color:black;
+            padding:300px 800px
+        }
+        </style>
+        <header>
+
+    <div align='center'>
+    <h1>Chatter</h1>
+    </div>
+    </header>
+    </head>
+    <body>
+        <script>
+                let i = 1
+                let database=firebase.database()
+
+            chat = function(){
+            let mymessage
+            let yourname = document.getElementById('yourname')
+                let adresseesname = document.getElementById('chatter')
+                let content = document.getElementById('message')
+                let m
+                database.ref('Message'+adresseesname.value+yourname.value+'/'+adresseesname.value+i).set({
+                    message:content.value
+                }) 
+                i++     
+
+              let messageref = database.ref('Message'+adresseesname.value+yourname.value)
+              messageref.on('value',(data)=>{
+                m = data.val()
+            })      
+         
+        }
+           </script>
+           <div>
+               <style>
+                   #left{
+                       background-color: blue;
+                       float: right;
+                       padding: 10px 30px;
+                   }
+                   #right{
+                       background-color: blue;
+                       float: left;
+                       padding: 10px 30px;
+                   }
+                   #messagefield1{
+                       float:right;
+                       background-color:aliceblue
+                   }
+                   #messagefield2{
+                       float:left;
+                       background-color:aliceblue
+                   }
+                   </style>
+               <input type='text' id='yourname' name='yourname' placeholder="Your name">
+        <input type='text' id='chatter' placeholder="Addressee's name" name='chatter'><br><br><br>
+        <div id="messagefield" align='right'>
+                
+        </div>
+           <br><br><br>
+        <textarea rows='2' cols="100" id='message'></textarea>
+            <div align='center' id='data'>
+                
+            </div><br>
+            <div align='center' id='data1'>
+                
+            </div><br>
+            <div align='center' id='data2'>
+                
+            </div><br>
+            <button onclick='chat()'>send</button>
+                <script>
+                function getMyMessage(){
+                    let yourname = document.getElementById('yourname').value
+                  let chatter = document.getElementById('chatter').value
+                  let messageref,messagearray
+                  let mref = database.ref('Message'+chatter+yourname)
+                  mref.on('value',(data)=>{
+                    messageref = data.val()
+                  })
+                  for(let i in messageref){
+                  let button = document.createElement('button')
+                               button.innerHTML = messageref[i].message
+                                button.align = 'right'
+                               messagefield.append(button)
+                                messagefield.append(document.createElement('br'))
+                             messagefield.append(document.createElement('br'))
+                }
+            }
+                       
+                           
+                    
+                    </script>
+                    <button onclick='getMyMessage()' id='1'>Get My Message</button>
+                    <div align='center'>
+                        <div id='contents'>
+                        </div>
+                        <div id='contents1'>
+                        </div>
+                        <div id='contents2'>                      
+                      </div>
+
+                        <script>   
+                         function getMyData(){
+                            let email,personname,phonenumber
+                            let fieldname = document.getElementById('contents')
+                            let fieldemail = document.getElementById('contents1')
+                            let fieldphonenumber = document.getElementById('contents2')
+                                let mydata = database.ref('Users/'+document.getElementById('yourname').value)
+                                mydata.on('value',(data)=>{
+                                   email=data.val().email
+                                   personname=data.val().name
+                                   phonenumber=data.val().phonenumber
+                                })
+                                fieldname.innerHTML = personname
+                                fieldemail.innerHTML = email
+                                fieldphonenumber.innerHTML = phonenumber
+                            }
+                        
+                            </script>
+                        <button onclick='getMyData()'>Give My Data</button>
+
+                        </div>
+        </body>
+    </html>

@@ -1,0 +1,120 @@
+<!DOCTYPE html><html>
+    <head>
+<!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-database.js"></script>
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+
+<script>
+  // Your web app's Firebase configuration
+  var firebaseConfig = {
+    apiKey: "AIzaSyCf7DrCaU5tkwqsKRfu7rNC-6dzt1q4Od8",
+    authDomain: "myscribe-data.firebaseapp.com",
+    databaseURL: "https://myscribe-data-default-rtdb.firebaseio.com",
+    projectId: "myscribe-data",
+    storageBucket: "myscribe-data.appspot.com",
+    messagingSenderId: "56781502554",
+    appId: "1:56781502554:web:842949eb24ee0d8be84063"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+</script>
+        </head>
+        <body align='center'>
+            <style>
+                body{
+                    background-color: rgb(0, 0, 0);
+                    color:rgb(0, 0, 0);
+                }
+                input{
+                    border:none;
+                    padding:13px 20px;
+                    background-color: rgb(255, 0, 0);
+                }
+                button{
+                    border: none;
+                    padding: 14px 20px;
+                    color:darkred;
+                    background-color: floralwhite;
+                }
+                div{
+                    background-color:rgb(0, 0, 0);
+                }
+          </style>
+          <script>
+                   let database=firebase.database()
+                function fill_database(){
+                let userref = 'Users/'+document.getElementById('login').value
+                database.ref(userref).update({
+                    name:document.getElementById('login').value,
+                })
+            }
+                referenceUser = function(){
+                    var a=database.ref('Users/'+document.getElementById('username').value)
+                    a.on('value',(data)=>{
+                        b=data.val()
+                    })
+                }
+                fill_username=function(){
+                    let loginref=database.ref('Users/'+document.getElementById('login').value)
+                    loginref.on('value',function (data){
+                        document.getElementById('username').value=data.val().name
+                    })
+                }
+                
+                send_letter=function(){
+                    database.ref('Users/'+document.getElementById('target').value).update({
+                        'message':document.getElementById('letter').value
+                    })
+                }
+                retrieve_letter=function(){
+                    let letterref=database.ref('Users/'+document.getElementById('login').value)
+                    letterref.on('value',(data)=>{
+                        document.getElementById('letter_got').value=data.val().message
+                    })
+                }
+              </script>
+                <style>
+                    #header li{
+                        float:left;
+                        display: inline-block;
+                        color:aliceblue
+                    }
+                    #headder li{
+                        display:inline-block;
+                        float:right;
+                    }
+                    .font{
+                        color:white
+                    }
+                    </style>
+                    <header>
+                <ul id='header'>
+                    <li><a href='signin.html'><button>Sign in</button></a></li>
+                    </ul>
+                    <ul id='headder'>
+                        <li id='li'><a href='help.html'><button>Need Help</button></a></li>
+                    </ul>
+                    <img src='logo.jpeg.jfif' >
+                    </header><br><br><br>
+                <div align='left'>
+            <input type='text' id='login' placeholder="login" name='login'><br><br><input type='text' id='username'> <br>
+            <button onclick='fill_database(),fill_username()'>Log in</button><br><br>
+                    </div>
+                    
+                    <br>
+            <input type='text' id='target' placeholder="target"><br><br>
+            <textarea rows='20' cols=35 id='letter'></textarea><br><br>
+            <button onclick='send_letter()'>Send letter</button><br><br>
+            <textarea rows='20' cols=35 id='letter_got'></textarea><br><br>
+            <button onclick='retrieve_letter()'>Show recieved letter</button><br>
+            <br>
+            <footer>
+                <ul id='header'>
+                    <h2><font color='white'>Enjoy Contacting with your friends</font></h2>
+                    </ul>
+                </footer>
+            </body>
+    </html>

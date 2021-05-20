@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/8.5.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.5.0/firebase-database.js"></script>
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+
+<script>
+  // Your web app's Firebase configuration
+  var firebaseConfig = {
+    apiKey: "AIzaSyDKHCEKc-kx08BtpmnaBLC-_EqTzis_yh8",
+    authDomain: "chatt-3a03f.firebaseapp.com",
+    projectId: "chatt-3a03f",
+    storageBucket: "chatt-3a03f.appspot.com",
+    messagingSenderId: "347023039448",
+    appId: "1:347023039448:web:a732a4d76085b7452bf0ad"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+</script>
+<head>
+    <style>
+        .header li{
+            display: inline-block;
+            float:right;
+            padding: 20px;
+        }
+        button{
+            padding: 20px 17px;
+            border: none;
+            background-color: aliceblue;
+        }
+        #i1{
+            float:left;
+            color:aliceblue
+        }
+        </style>
+        <header>
+    <ul class="header">
+        <li><a href='signinforchatter.html'><button>Sign in</button></a></li>
+        <li><button>Need help</button></li>
+    </ul>
+    <div align='center'>
+    <h1>Chatter</h1><br>
+    </div>
+    </header>
+    </head>
+    <body>
+        <div id='i1'>
+           <a href='chatter1.html'><button>Create Chat</button></a>
+            </div>
+        <div id='i2'>
+            <a href='chat.html'><button>Chat with friend<button></a>
+        </div>
+        </body>
+    </html>

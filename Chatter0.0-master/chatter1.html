@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/8.5.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.5.0/firebase-database.js"></script>
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+
+<script>
+  // Your web app's Firebase configuration
+  var firebaseConfig = {
+    apiKey: "AIzaSyDKHCEKc-kx08BtpmnaBLC-_EqTzis_yh8",
+    authDomain: "chatt-3a03f.firebaseapp.com",
+    projectId: "chatt-3a03f",
+    storageBucket: "chatt-3a03f.appspot.com",
+    messagingSenderId: "347023039448",
+    appId: "1:347023039448:web:a732a4d76085b7452bf0ad"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+</script>
+<style>
+        button{
+            padding: 20px 17px;
+            border: none;
+            background-color: aliceblue;
+        }
+        div{
+            color: aliceblue;
+        }
+        input{
+            color:black;
+            padding: 15px 30px;
+        }
+        </style>
+        <header>
+
+    <div align='center'>
+    <h1>Chatter</h1>
+    </div>
+    </header>
+    </head>
+    <body>
+            <div align=center>
+                <script>
+                    function addPerson(){
+                let database = firebase.database()
+                let allUsers
+                let myname = document.getElementById('yourname')
+                let addingperson = document.getElementById('personname')
+                let alluserref = database.ref('Users')
+                let email = document.getElementById('email').value
+                let number = document.getElementById('tel').value
+                alluserref.on('value',(data)=>{
+                    allUsers = data.val()
+                })                  
+                        database.ref('Users/'+myname.value+'/'+addingperson.value).set({
+                            friendname:addingperson.value,
+                            email:email,
+                            PhoneNumber:number
+                        })
+                    
+                
+              
+            }
+                    </script>
+                <input type='text' id='yourname' name='yourname' placeholder='Your name'>
+                <input type='text' id='personname' placeholder="name" name="personname"><br><br>
+                <input type='email' id='email' placeholder='email' name='email'><br><br>
+                <input type='tel' id='tel' placeholder='Number' name='tel'><br><br>
+                <button onclick='addPerson()'>Invite person</button>
+                <div>
+            </div>
+        </body>
+    </html>
